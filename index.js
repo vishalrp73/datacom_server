@@ -10,6 +10,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
 
+console.log('testing heroku updated server version')
 
 // Mongoose client connection
 mongoose.connect(`mongodb+srv://vishal:HackerMan2021@datacomcluster0.nzoob.mongodb.net/datacom?retryWrites=true&w=majority`).then (console.log('Connected to database !')).catch (err => console.log(err));
