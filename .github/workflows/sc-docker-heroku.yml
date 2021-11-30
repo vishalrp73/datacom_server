@@ -1,4 +1,4 @@
-name: Docker Image Build and Push to Heroku
+name: SonarCloud Scan and Docker Image Push to Heroku
 
 on:
   push:
@@ -7,6 +7,17 @@ on:
       - master
 
 jobs:
+  sonarCloudTrigger:
+    name: SonarCloud Trigger
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Repo
+        uses: actions/checkout@v2
+      - name: Analyse with SonarCloud
+        uses: sonarsource/sonarcloud-github-action@v1.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   deploy:
     name: Build and deploy Shiny app
     runs-on: ubuntu-latest
