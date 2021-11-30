@@ -13,7 +13,7 @@ app.use(cors());
 console.log('testing heroku updated server version')
 
 // Mongoose client connection
-mongoose.connect(`mongodb+srv://vishal:HackerMan2021@datacomcluster0.nzoob.mongodb.net/datacom?retryWrites=true&w=majority`).then (console.log('Connected to database !')).catch (err => console.log(err));
+mongoose.connect(process.env.MONGO_CON_STRING).then (console.log('Connected to database !')).catch (err => console.log(err));
 // Creating document schema and model
 const contactSchema = {
     name: String,
