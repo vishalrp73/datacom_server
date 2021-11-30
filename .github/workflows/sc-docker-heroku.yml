@@ -19,7 +19,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN_GITHUB }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
   deploy:
-    name: Build and deploy Shiny app
+    needs: sonarCloudTrigger
+    name: Build and deploy Datacom Server
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
