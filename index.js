@@ -60,28 +60,28 @@ app.post('/send', (req, res) => {
         text: 'DATACOM MONGODB DATA ENTRY HAS OCCURRED.'
     }
 
-    transporter.sendMail(mail, function(error, info) {
-        if (error) {
-            console.log(error)
-            res.status(400).send("Unable to send email")
-        } else {
-            const contactInfo = {
-                name: req.body.name,
-                email: req.body.email,
-                subject: req.body.subject,
-                message: req.body.message
-            }
-        
-            try {
-                Contact.create(contactInfo, function(err, doc) {
-                    console.log(err, doc);
+    const contactInfo = {
+        name: req.body.name,
+        email: req.body.email,
+        subject: req.body.subject,
+        message: req.body.message
+    }
+
+    try {
+        Contact.create(contactInfo, function(err, doc) {
+            console.log(err, doc);
+            transporter.sendMail(mail, function(error, info) {
+                if (error) {
+                    console.log(error)
+                    res.status(400).send("Unable to send email")
+                } else {
                     res.status(201).send('Info sent to database');
-                })
-            } catch (error) {
-                console.log(error) 
-            }      
-        }
-    })
+                }
+            })
+        })
+    } catch (error) {
+        console.log(error) 
+    } 
 
 });
 
